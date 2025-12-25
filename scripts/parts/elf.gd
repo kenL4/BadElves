@@ -24,7 +24,7 @@ func _ready() -> void:
 	area.add_child(collision)
 	add_child(area)
 	area.body_entered.connect(_on_body_entered)
-	area.area_entered.connect(_on_area_entered)
+	# area_entered no longer needed for goal (handled by base)
 
 func get_part_type() -> String:
 	return "elf"
@@ -34,10 +34,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("hazard"):
 		die()
 
-func _on_area_entered(area: Area2D) -> void:
-	# Check for goal
-	if area.is_in_group("goal"):
-		reach_goal()
+
 
 func reach_goal() -> void:
 	if not is_alive:

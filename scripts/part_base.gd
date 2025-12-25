@@ -22,6 +22,9 @@ func _ready() -> void:
 	# Connect to game manager signals
 	if GameManager:
 		GameManager.state_changed.connect(_on_state_changed)
+	
+	# Setup goal detection for dynamic parts
+	call_deferred("_setup_goal_detection")
 
 func get_part_type() -> String:
 	return "base"
@@ -280,3 +283,28 @@ func add_wheel_strut(neighbor: PartBase, target_pos: Vector2) -> void:
 	
 	add_child(strut)
 	visual_joints_map[neighbor] = strut
+
+func _setup_goal_detection() -> void:
+	# Create an Area2D to detect the goal
+	# We duplicate the existing collision shape(s) for this area
+	var area = Area2D.new()
+	area.name = "GoalDetector"
+	# We want this area to detect the 'goal' group
+	area.monitorable = false
+	area.monitoring = true
+	
+	# Find our collision shapes
+	for child in get_children():
+		if child is CollisionShape2D or child is CollisionPolygon2D:
+			var new_collision = child.duplicate()
+			area.add_child(new_collision)
+	
+	add_child(area)
+	area.area_entered.connect(_on_goal_entered)
+
+func _on_goal_entered(area: Area2D) -> void:
+	if area.is_in_group("goal"):
+		print(part_name, " reached the goal!")
+		if GameManager:
+			GameManager.complete_level()
+
