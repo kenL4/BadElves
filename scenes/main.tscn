@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://main123"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" uid="uid://buildui1" path="res://scenes/ui/build_ui.tscn" id="2_buildui"]
+[ext_resource type="PackedScene" uid="uid://gamehud1" path="res://scenes/ui/game_hud.tscn" id="3_gamehud"]
+[ext_resource type="Script" path="res://scripts/build_system.gd" id="4_buildsystem"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_main")
+
+[node name="BuildSystem" type="Node2D" parent="."]
+script = ExtResource("4_buildsystem")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="BuildUI" parent="UI" instance=ExtResource("2_buildui")]
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameHUD" parent="UI" instance=ExtResource("3_gamehud")]
+grow_horizontal = 2
+grow_vertical = 2

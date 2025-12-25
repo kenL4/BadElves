@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://delf456"]
+
+[ext_resource type="Script" path="res://scripts/parts/elf.gd" id="1_elf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 18.0
+
+[node name="Elf" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+input_pickable = true
+script = ExtResource("1_elf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_1")
+
+[node name="Body" type="Polygon2D" parent="."]
+color = Color(0.15, 0.65, 0.15, 1)
+polygon = PackedVector2Array(0, -12, 14, 20, -14, 20)
+
+[node name="BodyTrim" type="Polygon2D" parent="."]
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(-12, 16, 12, 16, 14, 20, -14, 20)
+
+[node name="Belt" type="Polygon2D" parent="."]
+color = Color(0.1, 0.1, 0.1, 1)
+polygon = PackedVector2Array(-10, 6, 10, 6, 10, 11, -10, 11)
+
+[node name="BeltBuckle" type="Polygon2D" parent="."]
+color = Color(1.0, 0.85, 0.2, 1)
+polygon = PackedVector2Array(-4, 5, 4, 5, 4, 12, -4, 12)
+
+[node name="Head" type="Polygon2D" parent="."]
+position = Vector2(0, -18)
+color = Color(0.95, 0.8, 0.65, 1)
+polygon = PackedVector2Array(9, 0, 6.3, 6.3, 0, 9, -6.3, 6.3, -9, 0, -6.3, -6.3, 0, -9, 6.3, -6.3)
+
+[node name="Hat" type="Polygon2D" parent="."]
+position = Vector2(0, -18)
+color = Color(0.85, 0.1, 0.1, 1)
+polygon = PackedVector2Array(-9, -2, 9, -2, 3, -20)
+
+[node name="HatTrim" type="Polygon2D" parent="."]
+position = Vector2(0, -18)
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(-10, -2, 10, -2, 10, 2, -10, 2)
+
+[node name="HatBall" type="Polygon2D" parent="."]
+position = Vector2(3, -38)
+color = Color(0.95, 0.95, 0.95, 1)
+polygon = PackedVector2Array(5, 0, 3.5, 3.5, 0, 5, -3.5, 3.5, -5, 0, -3.5, -3.5, 0, -5, 3.5, -3.5)
+
+[node name="Eye1" type="Polygon2D" parent="."]
+position = Vector2(-3, -19)
+color = Color(0.1, 0.1, 0.1, 1)
+polygon = PackedVector2Array(2, 0, 0, 2, -2, 0, 0, -2)
+
+[node name="Eye2" type="Polygon2D" parent="."]
+position = Vector2(3, -19)
+color = Color(0.1, 0.1, 0.1, 1)
+polygon = PackedVector2Array(2, 0, 0, 2, -2, 0, 0, -2)
+
+[node name="Smile" type="Line2D" parent="."]
+points = PackedVector2Array(-3, -14, 0, -12, 3, -14)
+width = 1.5
+default_color = Color(0.6, 0.3, 0.2, 1)

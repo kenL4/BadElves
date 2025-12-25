@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=3 uid="uid://f505p7jcw8rk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(2000, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_goal"]
+size = Vector2(50, 131)
+
+[node name="Level04" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 2000.0
+offset_bottom = 600.0
+color = Color(0.1, 0.05, 0.15, 1)
+
+[node name="BuildZone" type="Node2D" parent="."]
+
+[node name="BuildZoneVisual" type="Polygon2D" parent="BuildZone"]
+color = Color(0.15, 0.25, 0.35, 0.4)
+polygon = PackedVector2Array(150, 250, 534, 250, 534, 456, 150, 456)
+
+[node name="BuildZoneBorder" type="Line2D" parent="BuildZone"]
+points = PackedVector2Array(150, 250, 534, 250, 534, 456, 150, 456, 150, 250)
+width = 3.0
+default_color = Color(0.4, 0.7, 1, 0.8)
+
+[node name="BuildLabel" type="Label" parent="BuildZone"]
+offset_left = 150.0
+offset_top = 220.0
+offset_right = 534.0
+offset_bottom = 245.0
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 0.7)
+theme_override_font_sizes/font_size = 16
+text = "BUILD ZONE"
+horizontal_alignment = 1
+
+[node name="Terrain" type="StaticBody2D" parent="."]
+
+[node name="Ground" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(1000, 520)
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="GroundVisual" type="Polygon2D" parent="Terrain"]
+color = Color(0.9, 0.95, 1, 1)
+polygon = PackedVector2Array(0, 500, 2000, 500, 2000, 600, 0, 600)
+
+[node name="SnowTop" type="Polygon2D" parent="Terrain"]
+polygon = PackedVector2Array(0, 495, 2000, 495, 2000, 505, 0, 505)
+
+[node name="Platform" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PackedVector2Array(150, 456, 480, 456, 540, 500, 150, 500)
+
+[node name="PlatformVisual" type="Polygon2D" parent="Terrain"]
+color = Color(0.5, 0.35, 0.2, 1)
+polygon = PackedVector2Array(150, 456, 480, 456, 540, 500, 150, 500)
+
+[node name="Moguls" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PackedVector2Array(600, 500, 700, 450, 800, 500, 900, 400, 1000, 500, 1100, 420, 1200, 500, 1200, 600, 600, 600)
+
+[node name="MogulsVisual" type="Polygon2D" parent="Terrain"]
+color = Color(0.85, 0.9, 0.95, 1)
+polygon = PackedVector2Array(600, 500, 700, 450, 800, 500, 900, 400, 1000, 500, 1100, 420, 1200, 500, 1200, 600, 600, 600)
+
+[node name="MogulsSnow" type="Line2D" parent="Terrain"]
+points = PackedVector2Array(600, 500, 700, 450, 800, 500, 900, 400, 1000, 500, 1100, 420, 1200, 500)
+width = 4.0
+
+[node name="Tabletop" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PackedVector2Array(1300, 500, 1350, 400, 1650, 400, 1700, 500, 1700, 600, 1300, 600)
+
+[node name="TabletopVisual" type="Polygon2D" parent="Terrain"]
+color = Color(0.8, 0.85, 0.9, 1)
+polygon = PackedVector2Array(1300, 500, 1350, 400, 1650, 400, 1700, 500, 1700, 600, 1300, 600)
+
+[node name="TabletopSnow" type="Line2D" parent="Terrain"]
+points = PackedVector2Array(1300, 500, 1350, 400, 1650, 400, 1700, 500)
+width = 4.0
+
+[node name="Goal" type="Area2D" parent="." groups=["goal"]]
+position = Vector2(1850, 420)
+
+[node name="ChimneyBase" type="Polygon2D" parent="Goal"]
+color = Color(0.6, 0.3, 0.2, 1)
+polygon = PackedVector2Array(-30, 0, 30, 0, 30, 80, -30, 80)
+
+[node name="ChimneyTop" type="Polygon2D" parent="Goal"]
+position = Vector2(0, -10)
+color = Color(0.5, 0.25, 0.15, 1)
+polygon = PackedVector2Array(-35, 0, 35, 0, 35, 15, -35, 15)
+
+[node name="ChimneyInside" type="Polygon2D" parent="Goal"]
+color = Color(0.1, 0.05, 0.02, 1)
+polygon = PackedVector2Array(-20, -8, 20, -8, 20, 15, -20, 15)
+
+[node name="GoalCollision" type="CollisionShape2D" parent="Goal"]
+position = Vector2(0, -15.5)
+shape = SubResource("RectangleShape2D_goal")
+
+[node name="GoalLabel" type="Label" parent="Goal"]
+offset_left = -40.0
+offset_top = -50.0
+offset_right = 40.0
+offset_bottom = -25.0
+theme_override_colors/font_color = Color(1, 0.9, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "🎯 GOAL"
+horizontal_alignment = 1
