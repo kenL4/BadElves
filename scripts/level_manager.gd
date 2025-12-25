@@ -80,6 +80,12 @@ func is_level_unlocked(level_id: String) -> bool:
 func is_level_completed(level_id: String) -> bool:
 	return completed_levels.has(level_id)
 
+func is_last_level(level_id: String) -> bool:
+	for i in range(levels.size()):
+		if levels[i].id == level_id:
+			return i == levels.size() - 1
+	return false
+
 func complete_current_level() -> void:
 	if current_level_id.is_empty():
 		return

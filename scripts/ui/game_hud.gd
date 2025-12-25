@@ -152,19 +152,39 @@ func _on_game_state_changed(new_state: int) -> void:
 func _on_level_completed() -> void:
 	# Show victory message
 	victory_label = Label.new()
-	victory_label.text = "🎄 PRESENT DELIVERED! 🎄"
+	var is_game_complete = LevelManager and LevelManager.is_last_level(LevelManager.current_level_id)
+	
+	if is_game_complete:
+		victory_label.text = "🎄 THANKS FOR PLAYING! 🎄"
+	else:
+		victory_label.text = "🎄 PRESENT DELIVERED! 🎄"
+		
 	victory_label.position = Vector2(380, 250)
 	victory_label.add_theme_font_size_override("font_size", 36)
 	victory_label.add_theme_color_override("font_color", Color(1.0, 0.9, 0.3))
+	victory_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	# Force width to center text properly
+	victory_label.custom_minimum_size = Vector2(440, 0) 
 	add_child(victory_label)
 	
 	# Next level button
 	next_button = Button.new()
-	next_button.text = "Next Level →"
-	next_button.position = Vector2(500, 320)
+	if is_game_complete:
+		next_button.text = "Main Menu"
+		# Override connection later or handle in _on_next_pressed based on state? 
+		# Let's handle it in _on_next_pressed or just connect to _on_menu_pressed directly.
+		# But _on_next_pressed simply goes to level select currently. 
+		# Let's keep it simple: "Main Menu" button goes to level select (which has a back button) or main menu.
+		# The requested text is "Thanks for playing", implying end of flow.
+		# Let's make it go to Main Menu scene directly.
+		next_button.pressed.connect(func(): LevelManager.go_to_main_menu())
+	else:
+		next_button.text = "Next Level →"
+		next_button.pressed.connect(_on_next_pressed)
+		
+	next_button.position = Vector2(525, 320)
 	next_button.custom_minimum_size = Vector2(150, 50)
 	style_button(next_button, Color(0.2, 0.6, 0.8))
-	next_button.pressed.connect(_on_next_pressed)
 	add_child(next_button)
 	
 	# Add glow effect
